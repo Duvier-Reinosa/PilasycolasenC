@@ -18,8 +18,8 @@ printf("%s","1. PUSH\n");
 printf("%s","2. POP\n");
 printf("%s","3.  MOSTRAR PILA\n");
 printf("%s","4. MOSTRAR EL NUMERO DISPONIBLE EN EL TOPE DE LA PILA\n");
-printf("%s","5. Mostrar numeros amigos");
-
+printf("%s","5. Mostrar numeros amigos\n");
+printf("%s","6. Mostrar nnumero menor de la lista\n");
 printf("%s","8. SALIR: ");
 }
 //////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +64,21 @@ int stacktop(Pila Pilainicial){
         printf("%s","\n");
 		Pilainicial = Pilainicial->siguiente; 
     }
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+int buscarenpila(Pila Pilainicial, int valor)
+{	
+	int encontrado_en_pila=0;
+	while(Pilainicial!=NULL)
+	{
+		if(Pilainicial->dato==valor)
+		{
+			encontrado_en_pila=1;
+			return encontrado_en_pila;
+		}
+	Pilainicial=Pilainicial->siguiente;
+	}
+	return encontrado_en_pila;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //funcion para sumar divisores de un numero
@@ -117,22 +132,22 @@ void MostrarAmigos(Pila pilainicial)
 	
 }
 
-///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-int buscarenpila(Pila Pilainicial, int valor)
+//funcion para determinar el numero menor almacenado en la pila
+void nunMenor(Pila pilainicial)
 {	
-	int encontrado_en_pila=0;
-	while(Pilainicial!=NULL)
+	Pila menor;
+	menor=pilainicial;
+	while(pilainicial!=NULL)
 	{
-		if(Pilainicial->dato==valor)
-		{
-			encontrado_en_pila=1;
-			return encontrado_en_pila;
-		}
-	Pilainicial=Pilainicial->siguiente;
+			if(pilainicial->dato<menor->dato)
+			{
+				menor->dato=pilainicial->dato;
+			}
+	pilainicial=pilainicial->siguiente;
 	}
-	return encontrado_en_pila;
+	printf(" el numero menor es: %d",menor->dato);
 }
 ///////////////////////////////////////////////////////////////////////////////
 int main(){
@@ -179,7 +194,13 @@ while(opc!=8){
 			system ("cls");
 			MostrarAmigos(mi_pila);
 			break;
+
+			case 6:
+			system ("cls");
+			nunMenor(mi_pila);
+			break;
 			}      
+
   printf("ingrese un valor diferente de 8 para volver al menu: ");
   scanf("%d",&opc); 
  }
