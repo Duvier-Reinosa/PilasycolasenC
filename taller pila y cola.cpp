@@ -90,11 +90,26 @@ int stacktop(Pila Pilainicial){
 }
 //////////////////////////////////////////mostrar pila/////////////////////////////////
  void mostrar_pila(Pila Pilainicial){
-    while(Pilainicial != NULL){ 
-        printf("%d",Pilainicial->dato); 
-        printf("%s","\n");
-		Pilainicial = Pilainicial->siguiente; 
-    }
+ 	printf("\n De que manera quieres motrar la pila?");
+ 	printf("\n 1. Toda la pila");
+ 	printf("\n 2. Mostrar solo multiplos de 3\n");
+ 	int indice;
+ 	scanf("%d",&indice);
+ 	if(indice == 1){
+ 		while(Pilainicial != NULL){ 
+	        printf("%d",Pilainicial->dato); 
+	        printf("%s","\n");
+			Pilainicial = Pilainicial->siguiente; 
+    	}
+	 }else{
+	  	while(Pilainicial != NULL){ 
+	  		if(Pilainicial->dato % 3 == 0){
+	  			printf("%d\n",Pilainicial->dato); 
+			  }
+				Pilainicial = Pilainicial->siguiente; 
+    		}	
+	 }
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //funcion para sumar divisores de un numero
