@@ -1,5 +1,3 @@
-
-//buenas buenas
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -18,18 +16,43 @@ printf("%s","1. PUSH\n");
 printf("%s","2. POP\n");
 printf("%s","3.  MOSTRAR PILA\n");
 printf("%s","4. MOSTRAR EL NUMERO DISPONIBLE EN EL TOPE DE LA PILA\n");
-printf("%s","5. Mostrar numeros amigos\n");
-printf("%s","6. Mostrar nnumero menor de la lista\n");
+printf("%s","5. Mostrar numeros amigos");
+
 printf("%s","8. SALIR: ");
 }
+///////////////////////////////////////////////////////////////////////////////////////////
+//función para determinar datos repetidos
+ int existe(Pila Pilainicial,int valor){
+    while(Pilainicial != NULL){ 
+        if(Pilainicial->dato == valor){
+        	return 1;
+		}
+		Pilainicial = Pilainicial->siguiente; 
+    }
+    return 0;
+}
 //////////////////////////////////////////////////////////////////////////////////////
+//funcion cuenta digitos
+int cuentaDigitos(int valor){
+	if(valor / 10 == 0){
+		return 1;
+	}else{
+		return cuentaDigitos(valor / 10) + 1;
+	}
+}
+
+////////////////////////////////////////////////
 ////////////////////Funciï¿½n push///////////////////
 void Push(Pila *Pilainicial, int valor){
-    Pila nuevo_nodo; 
-    nuevo_nodo = (Pila)malloc(sizeof(nodoP)); 
-    nuevo_nodo->dato = valor; 
-    nuevo_nodo->siguiente = *Pilainicial; 
-    *Pilainicial = nuevo_nodo; 
+	if(existe(*Pilainicial, valor) == 0 && cuentaDigitos(valor) < 3){
+	    Pila nuevo_nodo; 
+	    nuevo_nodo = (Pila)malloc(sizeof(nodoP));
+	    nuevo_nodo->dato = valor; 
+	    nuevo_nodo->siguiente = *Pilainicial; 
+	    *Pilainicial = nuevo_nodo; 		
+	}else{
+		printf("No se puede ingresar el valor\n");
+	}
 }
 ////////////////////////////////funciï¿½n pop////////////////////////////
 int Pop(Pila *Pilainicial){
@@ -64,21 +87,6 @@ int stacktop(Pila Pilainicial){
         printf("%s","\n");
 		Pilainicial = Pilainicial->siguiente; 
     }
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-int buscarenpila(Pila Pilainicial, int valor)
-{	
-	int encontrado_en_pila=0;
-	while(Pilainicial!=NULL)
-	{
-		if(Pilainicial->dato==valor)
-		{
-			encontrado_en_pila=1;
-			return encontrado_en_pila;
-		}
-	Pilainicial=Pilainicial->siguiente;
-	}
-	return encontrado_en_pila;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //funcion para sumar divisores de un numero
@@ -132,22 +140,22 @@ void MostrarAmigos(Pila pilainicial)
 	
 }
 
+///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-//funcion para determinar el numero menor almacenado en la pila
-void nunMenor(Pila pilainicial)
+int buscarenpila(Pila Pilainicial, int valor)
 {	
-	Pila menor;
-	menor=pilainicial;
-	while(pilainicial!=NULL)
+	int encontrado_en_pila=0;
+	while(Pilainicial!=NULL)
 	{
-			if(pilainicial->dato<menor->dato)
-			{
-				menor->dato=pilainicial->dato;
-			}
-	pilainicial=pilainicial->siguiente;
+		if(Pilainicial->dato==valor)
+		{
+			encontrado_en_pila=1;
+			return encontrado_en_pila;
+		}
+	Pilainicial=Pilainicial->siguiente;
 	}
-	printf(" el numero menor es: %d",menor->dato);
+	return encontrado_en_pila;
 }
 ///////////////////////////////////////////////////////////////////////////////
 int main(){
@@ -194,13 +202,7 @@ while(opc!=8){
 			system ("cls");
 			MostrarAmigos(mi_pila);
 			break;
-
-			case 6:
-			system ("cls");
-			nunMenor(mi_pila);
-			break;
 			}      
-
   printf("ingrese un valor diferente de 8 para volver al menu: ");
   scanf("%d",&opc); 
  }
