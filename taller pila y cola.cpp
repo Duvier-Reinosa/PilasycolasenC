@@ -40,11 +40,19 @@ int cuentaDigitos(int valor){
 		return cuentaDigitos(valor / 10) + 1;
 	}
 }
+//////////////////////////////////////////////////////
+int sumaDigitos(int valor){
+	if(valor == 0){
+		return valor;
+	}else{
+		return sumaDigitos(valor / 10) + valor % 10;
+	}
+}
 
 ////////////////////////////////////////////////
 ////////////////////Funci�n push///////////////////
 void Push(Pila *Pilainicial, int valor){
-	if(existe(*Pilainicial, valor) == 0 && cuentaDigitos(valor) < 3){
+	if(existe(*Pilainicial, valor) == 0 && cuentaDigitos(valor) < 3 && sumaDigitos(valor) % 4 != 0){
 	    Pila nuevo_nodo; 
 	    nuevo_nodo = (Pila)malloc(sizeof(nodoP));
 	    nuevo_nodo->dato = valor; 
